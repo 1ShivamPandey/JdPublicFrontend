@@ -1,13 +1,17 @@
 import React from "react";
 
-import droneview from "../Assets/droneview.jpg";
-import front from "../Assets/front.jpg";
-import sideview from "../Assets/sideview.jpg";
-import teachers from "../Assets/teachers.jpg";
-
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
+import first from "../Assets/SliderImages/1.jpg";
+import second from "../Assets/SliderImages/2.JPG";
+import third from "../Assets/SliderImages/3.JPG";
+import fourth from "../Assets/SliderImages/4.JPG";
+import fifth from "../Assets/SliderImages/5.JPG";
+import sixth from "../Assets/SliderImages/6.JPG";
+import seventh from "../Assets/SliderImages/7.JPG";
+
+import "../css/Slideshow.css";
 const divStyle = {
   display: "flex",
   alignItems: "center",
@@ -18,16 +22,32 @@ const divStyle = {
 
 const slideImages = [
   {
-    url: front,
-    // caption: 'Slide 1'
+    url: third,
+    caption:"Block 2"
   },
   {
-    url: teachers,
-    // caption: 'Slide 2'
+    url: second,
+    caption: "Block 1",
   },
   {
-    url: sideview,
-    // caption: 'Slide 3'
+    url: first,
+    caption: "School Playground",
+  },
+  {
+    url: fourth,
+    caption: "Block 1",
+  },
+  {
+    url: fifth,
+    caption: "Playground",
+  },
+  {
+    url: sixth,
+    caption: "Entry gate",
+  },
+  {
+    url: seventh,
+    caption: "Corridor",
   },
 ];
 
@@ -38,9 +58,10 @@ const Slideshow = () => {
         {slideImages.map((slideImage, index) => (
           <div key={index}>
             <div
-              style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}
+              className="divstyle"
+              style={{ backgroundImage: `url(${slideImage.url})` }}
             >
-              {/* <span style={spanStyle}>{slideImage.caption}</span> */}
+              <span className="caption-span">{slideImage.caption}</span>
             </div>
           </div>
         ))}

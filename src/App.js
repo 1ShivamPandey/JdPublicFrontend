@@ -8,7 +8,10 @@ import Home from "./Screen/Home";
 import PublicDisclosure from "./Screen/PublicDisclosure";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Sparkle from "react-sparkle";
-
+import Home2 from "./Screen/Home2";
+import Footer from "./Components/Footer";
+import Dashboard from "./Screen/Dashboard/Dashboard";
+import Examination from "./Screen/Examination"
 // const TEXTS = ["Mission", "Vision", "Mission"];
 
 // const spanStyle = {
@@ -31,15 +34,20 @@ const App = () => {
   return (
     <div>
       <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Gallery" element={<Gallery />} />
-        <Route path="/PublicDisclosure" element={<PublicDisclosure />} />
-      </Routes>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home2 />} />
+          <Route path="/Home2" element={<Home2 />} />
+          <Route path="/Gallery" element={<Gallery />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/PublicDisclosure" element={<PublicDisclosure />} />
+          <Route path="/Examination" element={<Examination />} />
+
+        </Routes>
+        <Footer/>
       </>
 
-{/* 
+      {/* 
       <div
         style={{ backgroundColor: "black", color: "white", height: "10000px" }}
       >
@@ -86,9 +94,6 @@ const App = () => {
         </div>
       </div> 
  */}
-
-
-
     </div>
   );
 };

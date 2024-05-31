@@ -1,0 +1,14 @@
+.Gallery-div{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+@media (max-width:600px) {
+    .Gallery-div{
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-between;
+    }
+}

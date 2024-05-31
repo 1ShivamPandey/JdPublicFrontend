@@ -1,0 +1,12 @@
+.cursor-text{
+    font-size: 5em;
+    font-family: monospace;
+    font-weight: bold;
+    color: black;
+}
+@media (max-width:600px) {
+    .cursor-text{
+        font-size: 2em;
+        font-weight: 100;
+    }
+}

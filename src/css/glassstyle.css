@@ -1,0 +1,17 @@
+.glassStyle{
+    background-color: rgba(85, 152, 156, 0.54);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    margin: 20px auto;
+    color: #000000;
+    height: auto;
+    padding: 10px;
+}
+@media (max-width:600px) {
+    .glassStyle{
+        width: 300px;
+    }
+}

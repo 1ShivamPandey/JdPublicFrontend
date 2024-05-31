@@ -1,650 +1,179 @@
-import React from "react";
-// import { PasswordResponses } from "react-pdf";
+import React, { useEffect, useState } from "react";
 import Pdficon from "../Assets/Pdfimage.png";
-import Testpdf from "../Assets/Pdfs/Test.pdf";
 
-import GENERALINFORMATION from "../Assets/mandatory/GENERAL INFORMATION.pdf"
-import COPIESOFAFFILIATIONUPGRADATIONEXTENSIONLETTER from "../Assets/mandatory/COPIES OF AFFILIATION, UPGRADATION & EXTENSION LETTER.pdf"
-import SOCIETIESOFRENEWALCERTIFICATE from "../Assets/mandatory/SOCIETIES OF RENEWAL CERTIFICATE.pdf"
-import NOOBJECTIONCERTIFICATE from "../Assets/mandatory/NO OBJECTION CERTIFICATE.pdf"
-import PRIMARYANDJUNIORAFFILIATION from "../Assets/mandatory/PRIMARY AND JUNIOR AFFILIATION.pdf"
-import NATIONALBUILDINGSAFETYCERTIFICATE from "../Assets/mandatory/NATIONAL BUILDING SAFETY CERTIFICATE.pdf"
-import FIRESAFETYCERTIFICATE from "../Assets/mandatory/FIRE SAFETY CERTIFICATE.pdf"
-import DEOCERTIFICATE from "../Assets/mandatory/DEO CERTIFICATE.pdf"
-import WATERANDHEALTHSANITATIONCERTIFICATE from "../Assets/mandatory/WATER AND HEALTH SANITATION CERTIFICATE.pdf"
-import FEESTRUCTURE from "../Assets/mandatory/FEE STRUCTURE.pdf"
-import ANNUALACADEMICCALENDER from "../Assets/mandatory/ANNUAL ACADEMIC CALENDER.pdf"
-import SCHOOLMANAGEMENTCOMMITTEE from "../Assets/mandatory/SCHOOL MANAGEMENT COMMITTEE.pdf"
-import PARENTSTEACHERSASSOCIATION from "../Assets/mandatory/PARENTS TEACHERS ASSOCIATION.pdf"
-import LASTTHREEYEARRESULTOFBOARDEXAMINATION from "../Assets/mandatory/LAST THREE YEAR RESULT OF BOARD EXAMINATION.pdf"
-import LANDCERTIFICATE from "../Assets/mandatory/LAND CERTIFICATE.pdf"
-import STAFFSTATEMENT from "../Assets/mandatory/STAFF STATEMENT.pdf"
-import STUDENTDETAILS from "../Assets/mandatory/STUDENT DETAILS.pdf"
+import GENERALINFORMATION from "../Assets/mandatory/GENERAL INFORMATION.pdf";
+import COPIESOFAFFILIATIONUPGRADATIONEXTENSIONLETTER from "../Assets/mandatory/COPIES OF AFFILIATION, UPGRADATION & EXTENSION LETTER.pdf";
+import SOCIETIESOFRENEWALCERTIFICATE from "../Assets/mandatory/SOCIETIES OF RENEWAL CERTIFICATE.pdf";
+import NOOBJECTIONCERTIFICATE from "../Assets/mandatory/NO OBJECTION CERTIFICATE.pdf";
+import PRIMARYANDJUNIORAFFILIATION from "../Assets/mandatory/PRIMARY AND JUNIOR AFFILIATION.pdf";
+import NATIONALBUILDINGSAFETYCERTIFICATE from "../Assets/mandatory/NATIONAL BUILDING SAFETY CERTIFICATE.pdf";
+import FIRESAFETYCERTIFICATE from "../Assets/mandatory/FIRE SAFETY CERTIFICATE.pdf";
+import DEOCERTIFICATE from "../Assets/mandatory/DEO CERTIFICATE.pdf";
+import WATERANDHEALTHSANITATIONCERTIFICATE from "../Assets/mandatory/WATER AND HEALTH SANITATION CERTIFICATE.pdf";
+import FEESTRUCTURE from "../Assets/mandatory/FEE STRUCTURE.pdf";
+import ANNUALACADEMICCALENDER from "../Assets/mandatory/ANNUAL ACADEMIC CALENDER.pdf";
+import SCHOOLMANAGEMENTCOMMITTEE from "../Assets/mandatory/SCHOOL MANAGEMENT COMMITTEE.pdf";
+import PARENTSTEACHERSASSOCIATION from "../Assets/mandatory/PARENTS TEACHERS ASSOCIATION.pdf";
+import LASTTHREEYEARRESULTOFBOARDEXAMINATION from "../Assets/mandatory/LAST THREE YEAR RESULT OF BOARD EXAMINATION.pdf";
+import LANDCERTIFICATE from "../Assets/mandatory/LAND CERTIFICATE.pdf";
+import STAFFSTATEMENT from "../Assets/mandatory/STAFF STATEMENT.pdf";
+import STUDENTDETAILS from "../Assets/mandatory/STUDENT DETAILS.pdf";
 
+import axios from "axios";
+import { BASE_URL } from "../Constant";
 
-import { Link } from "react-router-dom";
 export default function PublicDisclosure() {
+  const [pdfDetails, SetpdfDetails] = useState("");
+  const [pdfFile, SetpdfFile] = useState([]);
+  const [productdata, setProductData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/Dashboard/MandatoryDisclosure/MandatoryDisclosure`
+        );
+
+        setProductData(response.data.PdfDataMandatory);
+        console.log(
+          "uploaded product response",
+          response.data.PdfDataMandatory
+        );
+
+        const data = response.data.PdfDataMandatory;
+        const details = data.map((product) => product.pdfDetails);
+        const image = data.map((product) => product.pdfFile);
+
+        SetpdfDetails(details);
+        SetpdfFile(image);
+
+        console.log("this is product image", image);
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div>
-      <div style={{ marginTop: "100px", marginBottom:'100px' }}>
-        <h1
-          style={{
-            color: "Black",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: "60px",
-          }}
-        >
-          Disclosure
-        </h1>
-
-        <div
-          style={{
-            backgroundColor: "white",
-            color: "black",
-            marginRight: "250px",
-            marginLeft: "250px",
-            // height: "400px",
-            borderRadius: "10px",
-            boxShadow: "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px",
-            // boxShadow:"rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px",
-          }}
-        >
-          <h1 style={{ textAlign: "center", fontFamily: "monospace", }}>
-            Mandatory Public Disclosure
-          </h1>
-          <hr></hr>
-
-          <div>
-            <table
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                tableLayout: "fixed",
-              }}
-            >
-
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  GENERAL INFORMATION
+    <div style={{marginTop:'150px'}}>
+      <div className="disclosure-container">
+        <h1  className="disclosure-title">Disclosure</h1>
+        <div className="disclosure-box">
+          <h1 className="disclosure-subtitle">Mandatory Public Disclosure</h1>
+          <hr />
+          <table className="disclosure-table">
+            {[
+              { name: "GENERAL INFORMATION", link: GENERALINFORMATION },
+              { name: "COPIES OF AFFILIATION, UPGRADATION & EXTENSION LETTER", link: COPIESOFAFFILIATIONUPGRADATIONEXTENSIONLETTER },
+              { name: "SOCIETIES OF RENEWAL CERTIFICATE", link: SOCIETIESOFRENEWALCERTIFICATE },
+              { name: "NO OBJECTION CERTIFICATE", link: NOOBJECTIONCERTIFICATE },
+              { name: "PRIMARY AND JUNIOR AFFILIATION", link: PRIMARYANDJUNIORAFFILIATION },
+              { name: "NATIONAL BUILDING SAFETY CERTIFICATE", link: NATIONALBUILDINGSAFETYCERTIFICATE },
+              { name: "FIRE SAFETY CERTIFICATE", link: FIRESAFETYCERTIFICATE },
+              { name: "DEO CERTIFICATE", link: DEOCERTIFICATE },
+              { name: "WATER AND HEALTH SANITATION CERTIFICATE", link: WATERANDHEALTHSANITATIONCERTIFICATE },
+              { name: "FEE STRUCTURE", link: FEESTRUCTURE },
+              { name: "ANNUAL ACADEMIC CALENDER", link: ANNUALACADEMICCALENDER },
+              { name: "SCHOOL MANAGEMENT COMMITTEE", link: SCHOOLMANAGEMENTCOMMITTEE },
+              { name: "PARENTS TEACHERS ASSOCIATION", link: PARENTSTEACHERSASSOCIATION },
+              { name: "LAST THREE YEAR RESULT OF BOARD EXAMINATION", link: LASTTHREEYEARRESULTOFBOARDEXAMINATION },
+              { name: "LAND CERTIFICATE", link: LANDCERTIFICATE },
+              { name: "STAFF STATEMENT", link: STAFFSTATEMENT },
+              { name: "STUDENT DETAILS", link: STUDENTDETAILS },
+            ].map((item, index) => (
+              <tr className="disclosure-row" key={index}>
+                <td className="disclosure-detail">{item.name}</td>
+                <td className="disclosure-link">
+                  <img src={Pdficon} alt="PDF Icon" className="pdf-icon" />
+                  <a href={item.link} className="download-link">Download</a>
                 </td>
-                
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-                  <a style={{textDecoration:'none',color:'black'}} href={GENERALINFORMATION}>Download</a>
-                </td>
-                
               </tr>
+            ))}
 
-            
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  COPIES OF AFFILIATION, UPGRADATION & EXTENSION LETTER
+            {productdata.map((item) => (
+              <tr className="disclosure-row" key={item._id}>
+                <td className="disclosure-detail">{item.pdfDetails}</td>
+                <td className="disclosure-link">
+                  <img src={Pdficon} alt="PDF Icon" className="pdf-icon" />
+                  <a href={`${BASE_URL}/${item.pdfFile}`} className="download-link">Download</a>
                 </td>
-
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={COPIESOFAFFILIATIONUPGRADATIONEXTENSIONLETTER}>Download</a>
-                </td>
-                
-
               </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  SOCIETIES OF RENEWAL CERTIFICATE
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={SOCIETIESOFRENEWALCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  NO OBJECTION CERTIFICATE
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={NOOBJECTIONCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  PRIMARY AND JUNIOR AFFILIATION
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={PRIMARYANDJUNIORAFFILIATION}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  NATIONAL BUILDING SAFETY CERTIFICATE
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={NATIONALBUILDINGSAFETYCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  FIRE SAFETY CERTIFICATE
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={FIRESAFETYCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  DEO CERTIFICATE
-                </td>
-           
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={DEOCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  WATER AND HEALTH SANITATION CERTIFICATE
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={WATERANDHEALTHSANITATIONCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  FEE STRUCTURE
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={FEESTRUCTURE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  ANNUAL ACADEMIC CALENDER
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={ANNUALACADEMICCALENDER}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  SCHOOL MANAGEMENT COMMITTEE
-                </td>
-             
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={SCHOOLMANAGEMENTCOMMITTEE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  PARENTS TEACHERS ASSOCIATION
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={PARENTSTEACHERSASSOCIATION}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  LAST THREE YEAR RESULT OF BOARD EXAMINATION
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={LASTTHREEYEARRESULTOFBOARDEXAMINATION}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  LAND CERTIFICATE
-                </td>
-             
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={LANDCERTIFICATE}>Download</a>
-                </td>
-                
-              </tr>
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  STAFF STATEMENT
-                </td>
-              
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={STAFFSTATEMENT}>Download</a>
-                </td>
-                
-              </tr>
-
-
-              <tr
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  borderBottom:'1px solid #ccc'
-                }}
-              >
-                <td style={{ width: "500px", fontWeight: "bold",marginTop:'20px'}}>
-                  STUDENT DETAILS
-                </td>
-               
-                <td
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <img
-                    src={Pdficon}
-                    style={{
-                      height: "40px",
-                      width: "40px",
-                      marginLeft: "10px",
-                    }}
-                  />
-
-<a style={{textDecoration:'none',color:'black'}} href={STUDENTDETAILS}>Download</a>
-                </td>
-                
-              </tr>
-
-
-
-            </table>
-          </div>
+            ))}
+          </table>
         </div>
       </div>
+
+      <style jsx>{`
+        .disclosure-container {
+          margin: 100px 0;
+        }
+        .disclosure-title {
+          color: black;
+          text-align: center;
+          font-weight: bold;
+          font-size: 60px;
+        }
+        .disclosure-box {
+          background-color: white;
+          color: black;
+          margin: 0 auto;
+          padding: 20px;
+          max-width: 1000px;
+          border-radius: 10px;
+          box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        }
+        .disclosure-subtitle {
+          text-align: center;
+          font-family: monospace;
+        }
+        .disclosure-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .disclosure-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #ccc;
+          padding: 10px 0;
+        }
+        .disclosure-detail {
+          flex: 1;
+          font-weight: bold;
+          margin-top: 20px;
+        }
+        .disclosure-link {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .pdf-icon {
+          height: 40px;
+          width: 40px;
+          margin-left: 10px;
+        }
+        .download-link {
+          text-decoration: none;
+          color: black;
+        }
+
+        @media (max-width: 768px) {
+          .disclosure-box {
+            margin: 0 20px;
+          }
+          .disclosure-title {
+            font-size: 40px;
+          }
+          .disclosure-detail {
+            font-size: 14px;
+          }
+          .pdf-icon {
+            height: 30px;
+            width: 30px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
