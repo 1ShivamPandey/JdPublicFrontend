@@ -1,99 +1,102 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import CursorText from "./Components/CursorText";
 import Slideshow from "./Components/Slideshow";
 import Gallery from "./Screen/Gallery";
 import Home from "./Screen/Home";
 import PublicDisclosure from "./Screen/PublicDisclosure";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Sparkle from "react-sparkle";
 import Home2 from "./Screen/Home2";
 import Footer from "./Components/Footer";
 import Dashboard from "./Screen/Dashboard/Dashboard";
-import Examination from "./Screen/Examination"
-// const TEXTS = ["Mission", "Vision", "Mission"];
-
-// const spanStyle = {
-//   padding: "20px",
-//   background: "#efefef",
-//   color: "#000000",
-// };
-
+import Examination from "./Screen/Examination";
+import NotFound from "./Screen/NotFound";
+import UploadGalleryImages from "./Screen/Dashboard/UploadGalleryImages";
+import UploadYoutubeVideos from "./Screen/Dashboard/UploadYoutubeVideos";
+import UploadMandatoryDisclosure from "./Screen/Dashboard/UploadMandatoryDisclosure";
+import UploadExaminationDatesheets from "./Screen/Dashboard/UploadExaminationDatesheets";
+import UploadSchoolActivities from "./Screen/Dashboard/UploadSchoolActivities";
+import UploadSchoolAdventure from "./Screen/Dashboard/UploadSchoolAdventure";
+import Login from "./Screen/Authentication/Login";
+import SlidingImagesAdventure from "./Components/SlidingImagesSchoolAdventure";
 const App = () => {
-  // const [index, setIndex] = React.useState(0);
+  const [userData, setUserData] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // React.useEffect(() => {
-  //   const intervalId = setInterval(
-  //     () => setIndex((index) => index + 1),
-  //     3000 // every 3 seconds
-  //   );
-  //   return () => clearTimeout(intervalId);
-  // }, []);
+  const fixedUsername = "jdpublicschool556@gmail.com";
+  const fixedPassword = "998877jdpublic";
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("userInfo");
+    try {
+      const parsedData = savedData ? JSON.parse(savedData) : null;
+      console.log("Parsed Data:", parsedData);
+      setUserData(parsedData);
+      setIsAuthenticated(parsedData !== null);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      setUserData(null);
+      setIsAuthenticated(false);
+    }
+  }, []);
+
+  const handleLogin = (username, password) => {
+    if (username === fixedUsername && password === fixedPassword) {
+      const user = { username: fixedUsername };
+      localStorage.setItem("userInfo", JSON.stringify(user));
+      setUserData(user);
+      setIsAuthenticated(true);
+    } else {
+      alert("Invalid credentials");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo");
+    setUserData(null);
+    setIsAuthenticated(false);
+  };
 
   return (
     <div>
-      <>
+      <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home2 />} />
           <Route path="/Home2" element={<Home2 />} />
           <Route path="/Gallery" element={<Gallery />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/PublicDisclosure" element={<PublicDisclosure />} />
+          <Route path="SlidingImagesAdventure" element={<SlidingImagesAdventure/>}/>
           <Route path="/Examination" element={<Examination />} />
-
+          <Route path="/Login" element={isAuthenticated ? <Navigate to="/Dashboard" /> : <Login onLogin={handleLogin} />} />
+          
+          {isAuthenticated ? (
+            <>
+              <Route path="/Dashboard" element={<Dashboard onLogout={handleLogout} />} />
+              <Route path="/UploadGalleryImages" element={<UploadGalleryImages />} />
+              <Route path="/UploadYoutubeVideos" element={<UploadYoutubeVideos />} />
+              <Route path="/UploadMandatoryDisclosure" element={<UploadMandatoryDisclosure />} />
+              <Route path="/UploadExaminationDatesheets" element={<UploadExaminationDatesheets />} />
+              <Route path="/UploadSchoolActivities" element={<UploadSchoolActivities />} />
+              <Route path="/UploadSchoolAdventure" element={<UploadSchoolAdventure />} />
+            </>
+          ) : (
+            <>
+              <Route path="/Dashboard" element={<Navigate to="/Login" />} />
+              <Route path="/UploadGalleryImages" element={<Navigate to="/Login" />} />
+              <Route path="/UploadYoutubeVideos" element={<Navigate to="/Login" />} />
+              <Route path="/UploadMandatoryDisclosure" element={<Navigate to="/Login" />} />
+              <Route path="/UploadExaminationDatesheets" element={<Navigate to="/Login" />} />
+              <Route path="/UploadSchoolActivities" element={<Navigate to="/Login" />} />
+              <Route path="/UploadSchoolAdventure" element={<Navigate to="/Login" />} />
+            </>
+          )}
         </Routes>
-        <Footer/>
-      </>
-
-      {/* 
-      <div
-        style={{ backgroundColor: "black", color: "white", height: "10000px" }}
-      >
-        <div style={{ paddingTop: "200px", textAlign: "center" }}>
-          <CursorText />
-        </div>
-
-        <div style={{ marginTop: "100px" }}>
-          <Slideshow />
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "center"}}>
-          <h1
-            style={{
-              textAlign: "center",
-              color: "White",
-              fontSize: "80px",
-            }}
-          >
-            <TextTransition springConfig={presets.wobbly}>
-              {TEXTS[index % TEXTS.length]}
-            </TextTransition>
-          </h1>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: "white",
-           display: "flex",
-           flexDirection:'column',
-            // justifyContent: "center",
-            // alignItems: "center",
-            margin: "10px",
-            backdropFilter: "blur(0.8px)",
-            color:'black'
-          }}
-        >
-        <p> Our mission is to  make students feel homey in School </p> 
-          <p>Where they come happily in the morning becuase teachers shower love and care on them</p>
-          <p>Where they become self disciplined, self confident and self motivator </p>
-          <p>Where they feel sympathy for the fellow students and develop empathy for environment </p>
-          <p>Where they get prepare with the courage to face the challenges of life</p>
-          <p>Where their skills and abilities bloom in the leadership of developing faculty</p>
-        </div>
-      </div> 
- */}
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 };

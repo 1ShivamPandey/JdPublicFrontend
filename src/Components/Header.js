@@ -13,52 +13,55 @@ export default function Header() {
   return (
     <div className="header">
       <div className="header-content">
+
         <div>
           <Link to="/">
           <img  className="logo-size" src={logo} alt="School Logo" />
           </Link>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", color: "white" }}>
+        <div className="School-tabs">
           
           {/* <div style={{display:'flex',flexDirection:'column',justifyContent:'space-around'}} > */}
-
+          <div style={{display:'flex',flexDirection:'row', justifyContent:'space-evenly'}}>
+          <h2 className="school-name" style={{ fontWeight: "bolder" }}>JD PUBLIC SCHOOL</h2>
+ 
           <div className="School-Details">
-            <h2 style={{ fontWeight: "bolder" }}>JD PUBLIC SCHOOL</h2>
-            <p style={{ marginTop: "30px" }}>School Code : 60722</p>
-            <p style={{ marginTop: "30px" }}>Affiliation No : 2131719</p>
+            <p style={{fontWeight: "bolder",marginTop:'30px',marginLeft:'20px'  }}>School Code : 60722</p>
+            <p style={{marginLeft:'20px',fontWeight: "bolder" ,marginTop:'30px'}}>Affiliation No : 2131719</p>
           </div>
 
+          </div>
 
           <div className="menu-icon" onClick={toggleMenu}>
-            <img src={Bar} />
+            <img style={{height:'50px'}} src={Bar} />
           </div>
 
           {/* </div> */}
 
           <div className={`nav-bar ${isOpen ? "open" : ""}`}>
             <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/">
+              <Link className="link-style" style={{  textDecoration: "none",fontWeight:'bold' }} to="/">
                 Home
               </Link>
             </div>
-            <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/#about-us">
+            {/* <div>
+              <Link className="link-style" style={{  textDecoration: "none",fontWeight:'bold' }} to="/#about-us">
                 About us
               </Link>
             </div>
             <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/Admission">
+              <Link className="link-style" style={{  textDecoration: "none",fontWeight:'bold' }} to="/Admission">
                 Admission
               </Link>
-            </div>
+            </div>*/}
             <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/Examination">
+              <Link className="link-style" style={{  textDecoration: "none" ,fontWeight:'bold'}} to="/Examination">
                 Examination
               </Link>
-            </div>
+            </div> 
             <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/Gallery">
+              <Link className="link-style" style={{  textDecoration: "none" ,fontWeight:'bold'}} to="/Gallery">
                 Gallery
               </Link>
             </div>
@@ -68,11 +71,17 @@ export default function Header() {
               </Link>
             </div> */}
             <div>
-              <Link className="link-style" style={{  textDecoration: "none" }} to="/PublicDisclosure">
+              <Link className="link-style" style={{  textDecoration: "none",fontWeight:'bold' }} to="/PublicDisclosure">
                 Mandatory disclosure
               </Link>
             </div>
+            <div>
+              <Link className="link-style" style={{  textDecoration: "none",fontWeight:'bold' }} to="/Dashboard">
+                Dashboard 
+              </Link>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

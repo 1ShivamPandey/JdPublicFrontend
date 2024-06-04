@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { BASE_URL } from "../Constant";
 
 export default function Examination() {
-  const [pdfDetails, SetpdfDetails] = useState("");
-  const [pdfFile, SetpdfFile] = useState([]);
   const [productdata, setProductData] = useState([]);
 
   useEffect(() => {
@@ -18,15 +16,6 @@ export default function Examination() {
 
         setProductData(response.data.PdfData);
         console.log("uploaded product response", response.data.PdfData);
-
-        const data = response.data.PdfData;
-        const details = data.map((product) => product.pdfDetails);
-        const image = data.map((product) => product.pdfFile);
-
-        SetpdfDetails(details);
-        SetpdfFile(image);
-
-        console.log("this is product image", image);
       } catch (error) {
         console.error("Error fetching cart data:", error);
       }
@@ -35,7 +24,7 @@ export default function Examination() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "21px" }}>
       <div style={{ marginTop: "150px", marginBottom: "100px" }}>
         <h1
           style={{
@@ -98,14 +87,15 @@ export default function Examination() {
                         justifyContent: "flex-end",
                       }}
                     >
-                      <a
+                      <Link
                         style={{
                           textDecoration: "none",
                           color: "black",
                           display: "flex",
                           alignItems: "center",
                         }}
-                        href={`${BASE_URL}/${item.pdfFile}`}
+                        to={`${BASE_URL}/${item.pdfFile}`}
+                        target="_blank"
                       >
                         <img
                           src={Pdficon}
@@ -116,8 +106,8 @@ export default function Examination() {
                           }}
                           alt="PDF icon"
                         />
-                        Download
-                      </a>
+                        View
+                      </Link>
                     </td>
                   </tr>
                 ))}
