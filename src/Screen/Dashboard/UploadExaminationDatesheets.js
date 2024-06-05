@@ -33,6 +33,10 @@ export default function UploaExaminationDatesheets() {
         }
       );
       console.log("done");
+      alert("Datesheet uploaded")
+      SetpdfDetails("")
+      SetpdfFile("")
+
     } catch (error) {
       console.log(error);
     }

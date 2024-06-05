@@ -31,6 +31,9 @@ export default function UploadSchoolAdventure() {
           },
         }
       );
+      alert(" School Adventure image uploaded successfully 🎉")
+      setProductDetails("");
+      setProductImage("");
       console.log("done");
     } catch (error) {
       console.log(error);

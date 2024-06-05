@@ -33,8 +33,10 @@ export default function UploadGalleryImages() {
       );
 
       console.log("Upload successful");
+      alert("Image uploaded")
+
       setProductDetails(""); // Clear input after upload
-      setProductImage(null); // Clear input after upload
+      setProductImage(""); // Clear input after upload
       fetchData(); // Refresh the data after upload
     } catch (error) {
       console.log("Error uploading:", error);

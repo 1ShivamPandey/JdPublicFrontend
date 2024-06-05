@@ -539,6 +539,28 @@ const Dashboard = ({ onLogout }) => {
             UploadSchoolAdventure
           </Link>
         </div>
+
+
+        <div
+          style={{
+            backgroundColor: "lightblue",
+            margin: "10px 500px 0 500px",
+            height: "50px",
+            borderRadius: "10px",
+          }}
+        >
+          <Link
+            style={{
+              color: "Black",
+              textDecoration: "none",
+              marginLeft: "180px",
+            }}
+            to="/UploadSlideShow"
+          >
+            UploadSlideShow
+          </Link>
+        </div>
+
       </div>
     </div>
   );

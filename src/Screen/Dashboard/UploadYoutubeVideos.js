@@ -32,6 +32,9 @@ export default function UploadYoutubeVideos() {
           },
         }
       );
+      alert("Youtube video uploaded successfully 🎉");
+      Setyoutubedetails("");
+      Setyoutubelink("");
       console.log("done");
     } catch (error) {
       console.log(error);
@@ -79,7 +82,7 @@ export default function UploadYoutubeVideos() {
         `${BASE_URL}/api/Dashboard/youtube/link/${id}`
       );
       console.log("Delete successful");
-       fetchData(); // Refresh the data after delete
+      fetchData(); // Refresh the data after delete
     } catch (error) {
       console.log("Error deleting:", error);
     }

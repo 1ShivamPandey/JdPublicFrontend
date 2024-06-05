@@ -25,6 +25,7 @@ import CommentCards from "../Components/Card";
 import SlidingImages from "../Components/SlidingImages";
 import Cardswipe from "../Components/Cardswipe";
 import SlidingImagesAdventure from "../Components/SlidingImagesSchoolAdventure";
+import AutomaticSlideshow from "../Components/AutomaticSlideshow";
 export default function Home2() {
   const [productData, setProductData] = useState([]);
   const [image, setproductImage] = useState([]);
@@ -602,7 +603,7 @@ export default function Home2() {
         <SlidingImagesAdventure/>
       </div>    
 
-
+{/* <AutomaticSlideshow/> */}
 
 {/* <Cardswipe/> */}
 {/* <SlidingImages/> */}

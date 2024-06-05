@@ -31,6 +31,10 @@ export default function UploadMandatoryDisclosure() {
           },
         }
       );
+      SetpdfDetails("");
+      SetpdfFile("");
+      alert("Mandatory file uploaded 🎉");
+      
       console.log("done");
     } catch (error) {
       console.log(error);
@@ -73,7 +77,7 @@ export default function UploadMandatoryDisclosure() {
         `${BASE_URL}/api/Dashboard/MandatoryDisclosure/MandatoryDisclosure/${id}`
       );
       console.log("Delete successful");
-       fetchData(); // Refresh the data after delete
+      fetchData(); // Refresh the data after delete
     } catch (error) {
       console.log("Error deleting:", error);
     }

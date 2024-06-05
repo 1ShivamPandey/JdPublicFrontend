@@ -21,12 +21,13 @@ import UploadSchoolActivities from "./Screen/Dashboard/UploadSchoolActivities";
 import UploadSchoolAdventure from "./Screen/Dashboard/UploadSchoolAdventure";
 import Login from "./Screen/Authentication/Login";
 import SlidingImagesAdventure from "./Components/SlidingImagesSchoolAdventure";
+import UploadSlideShow from "./Screen/Dashboard/UploadSlideShowImages";
 const App = () => {
   const [userData, setUserData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const fixedUsername = "jdpublicschool556@gmail.com";
-  const fixedPassword = "998877jdpublic";
+  const fixedUsername = "jdpublicschool2013@gmail.com";
+  const fixedPassword = "PASS22@pPASS22@p";
 
   useEffect(() => {
     const savedData = localStorage.getItem("userInfo");
@@ -82,6 +83,8 @@ const App = () => {
               <Route path="/UploadExaminationDatesheets" element={<UploadExaminationDatesheets />} />
               <Route path="/UploadSchoolActivities" element={<UploadSchoolActivities />} />
               <Route path="/UploadSchoolAdventure" element={<UploadSchoolAdventure />} />
+              <Route path="/UploadSlideShow" element={<UploadSlideShow />} />
+
             </>
           ) : (
             <>
@@ -92,6 +95,7 @@ const App = () => {
               <Route path="/UploadExaminationDatesheets" element={<Navigate to="/Login" />} />
               <Route path="/UploadSchoolActivities" element={<Navigate to="/Login" />} />
               <Route path="/UploadSchoolAdventure" element={<Navigate to="/Login" />} />
+              <Route path="/UploadSlideShow" element={<Navigate to="/Login" />} />
             </>
           )}
         </Routes>

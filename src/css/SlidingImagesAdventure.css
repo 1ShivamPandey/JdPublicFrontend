@@ -12,7 +12,7 @@
   
   .marquee-content.left-to-right {
     display: flex;
-    animation: scrolling-left-to-right 300s linear infinite;
+    animation: scrolling-left-to-right 25s linear infinite;
   }
   
   .marquee-item {
