@@ -87,11 +87,11 @@ export default function PublicDisclosure() {
                 <td className="disclosure-link">
                   <img src={Pdficon} alt="PDF Icon" className="pdf-icon" />
                   <a href={item.link} className="download-link">Download</a>
-                </td>
-              </tr>
-            ))}
+              </td>
+           </tr>
+           ))}
 
-            {productdata.map((item) => (
+            {productdata.length> 0 && productdata.map((item) => (
               <tr className="disclosure-row" key={item._id}>
                 <td className="disclosure-detail">{item.pdfDetails}</td>
                 <td className="disclosure-link">

@@ -27,7 +27,7 @@ export default function SlidingImages() {
     <div>
       <div className="marquee">
         <div className="marquee-content right-to-left">
-          {productData.map((item) => (
+          {productData.length> 0 && productData.map((item) => (
             <div className="marquee-item" key={item._id}>
               <img style={{height:'150px',borderRadius:'10px'}}
                 className="img"

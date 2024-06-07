@@ -1,76 +1,80 @@
 import React, { useEffect, useState } from "react";
+import "../css/AutomaticSlideshow.css";
 import axios from "axios";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
-
 import { BASE_URL } from "../Constant";
 
 const AutomaticSlideshow = () => {
-  const [slideImages, setSlideImages] = useState([]);
+  const [slideIndex, setSlideIndex] = useState([1, 1]);
+  const [productData, setProductData] = useState([]);
+
+  const slideId = "mySlides1";
+
+  const plusSlides = (n) => {
+    showSlides(slideIndex[0] + n);
+  };
+
+  const showSlides = (n) => {
+    let i;
+    const slides = document.getElementsByClassName(slideId);
+    if (n > slides.length) {
+      setSlideIndex([1, 1]);
+    } else if (n < 1) {
+      setSlideIndex([slides.length, slides.length]);
+    } else {
+      setSlideIndex([n, n]);
+    }
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    slides[slideIndex[0] - 1].style.display = "block";
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/Dashboard/school/SlideShow`
+      );
+      setProductData(response.data.ProductData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/api/Dashboard/GalleryDataUpload`
-        );
-
-        console.log("API response:", response.data);
-
-        const data = response.data.ProductData;
-        const slides = data.map((product) => ({
-          url: `${BASE_URL}/${product.productImage}`,
-          caption: product.productDetails,
-        }));
-
-        console.log("Formatted slide data:", slides);
-
-        setSlideImages(slides);
-      } catch (error) {
-        console.error("Error fetching gallery data:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
-  const slideContainerStyle = {
-    width: "100%",
-    margin: "0 auto",
-  };
-
-  const slideDivStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundSize: "cover",
-    height: "800px",
-    position: "relative",
-  };
-
-  const captionSpanStyle = {
-    position: "absolute",
-    bottom: "20px",
-    left: "20px",
-    color: "white",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    padding: "10px",
-    borderRadius: "5px",
-  };
-
+  useEffect(() => {
+    if (productData.length > 0) {
+      showSlides(slideIndex[0]);
+    }
+  }, [productData]);
+console.log("Product data...",productData)
   return (
-    <div style={slideContainerStyle}>
-      <Slide>
-        {slideImages.map((slideImage, index) => (
-          <div key={index}>
-            <div
-              style={{ ...slideDivStyle, backgroundImage: `url(${slideImage.url})` }}
-            >
-              <span style={captionSpanStyle}>{slideImage.caption}</span>
-            </div>
+    <div>
+      {/* <h2 style={{ textAlign: "center" }}>Multiple Slideshows</h2> */}
+
+      <div className="slideshow-container">
+        {productData.length> 0 && productData.map((item) => (
+          <div className="mySlides1" key={item._id}>
+            <div style={{color:'black',fontWeight:'bold',fontSize:'50px'}} className="caption">{item.productDetails}</div>
+            <img
+              src={`${BASE_URL}/${item.productImage}`}
+              style={{ width: "100%", }}
+              // alt={product.description}
+            />
           </div>
         ))}
-      </Slide>
+
+        <a className="prev" onClick={() => plusSlides(-1)}>
+          &#10094;
+        </a>
+        <a className="next" onClick={() => plusSlides(1)}>
+          &#10095;
+        </a>
+      </div>
     </div>
   );
 };

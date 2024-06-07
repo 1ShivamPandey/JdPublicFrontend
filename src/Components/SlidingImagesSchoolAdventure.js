@@ -30,7 +30,7 @@ export default function SlidingImagesAdventure() {
     <div>
       <div className="marquee">
         <div className="marquee-content left-to-right">
-          {productData.map((item) => (
+          {productData.length> 0 && productData.map((item) => (
             <div className="marquee-item" key={item._id}>
               <img  style={{height:'150px',borderRadius:'10px'}}
                 className="img"

@@ -90,7 +90,7 @@ const ActiveSlideshow = () => {
   return (
     <div className="slide-container">
       <Slide>
-        {slideImages.map((slideImage, index) => (
+        {slideImages.length> 0 && slideImages.map((slideImage, index) => (
           <div key={index}>
             <div
               className="divstyle"

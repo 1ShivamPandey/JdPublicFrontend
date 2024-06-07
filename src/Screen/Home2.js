@@ -36,58 +36,58 @@ export default function Home2() {
   const [adventureImage, setadventureproductImage] = useState([]);
   //const [imageadventure,set]
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/api/Dashboard/school/SchoolActivities`
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${BASE_URL}/api/Dashboard/school/SchoolActivities`
+  //       );
 
-        setProductData(response.data.ProductData);
-        console.log("uploaded product response", response.data.ProductData);
+  //       setProductData(response.data.ProductData);
+  //       console.log("uploaded product response", response.data.ProductData);
 
-        const data = response.data.ProductData;
-        const details = data.map((product) => product.productDetails);
-        const image = data.map((product) => product.productImage);
+  //       const data = response.data.ProductData;
+  //       const details = data.map((product) => product.productDetails);
+  //       const image = data.map((product) => product.productImage);
 
-        setProductDetails(details);
-        setproductImage(image);
+  //       setProductDetails(details);
+  //       setproductImage(image);
 
-        console.log("this is product image", image);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  //       console.log("this is product image", image);
+  //     } catch (error) {
+  //       console.error("Error fetching cart data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/api/Dashboard/school/SchoolAdventure`
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${BASE_URL}/api/Dashboard/school/SchoolAdventure`
+  //       );
 
-        setadventureProductData(response.data.ProductDataAdventure);
-        console.log(
-          "uploaded product response",
-          response.data.ProductDataAdventure
-        );
+  //       setadventureProductData(response.data.ProductDataAdventure);
+  //       console.log(
+  //         "uploaded product response",
+  //         response.data.ProductDataAdventure
+  //       );
 
-        const data = response.data.ProductDataAdventure;
-        const details = data.map((product) => product.productDetails);
-        const image = data.map((product) => product.productImage);
+  //       const data = response.data.ProductDataAdventure;
+  //       const details = data.map((product) => product.productDetails);
+  //       const image = data.map((product) => product.productImage);
 
-        setadventureProductDetails(details);
-        setadventureproductImage(image);
+  //       setadventureProductDetails(details);
+  //       setadventureproductImage(image);
 
-        console.log("this is product image", image);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  //       console.log("this is product image", image);
+  //     } catch (error) {
+  //       console.error("Error fetching cart data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -115,8 +115,8 @@ export default function Home2() {
       </div> */}
       </div>
 
-      <Slideshow />
-
+      {/* <Slideshow /> */}
+      <AutomaticSlideshow />
       {/* MISSION */}
       <div>
         <h1 className="mission-word">Mission</h1>
@@ -193,9 +193,9 @@ export default function Home2() {
           />
         </div>
       </div> */}
-      <div style={{marginTop:'50px'}}>
-<CommentCards/>
-</div>
+      <div style={{ marginTop: "50px" }}>
+        <CommentCards />
+      </div>
       {/* About us  */}
       <div
         id="about-us"
@@ -230,7 +230,7 @@ export default function Home2() {
 
       {/* Facilities */}
 
-{/*       
+      {/*       
       <div>
         <h1
           style={{
@@ -402,131 +402,145 @@ export default function Home2() {
           </div>
         </div>
       </div> */}
-<div>
-  <h1
-    style={{
-      color: "black",
-      fontWeight: "bold",
-      textAlign: "center",
-      marginTop: "50px",
-    }}
-  >
-    FACILITIES
-  </h1>
+      <div>
+        <h1
+          style={{
+            color: "black",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginTop: "50px",
+          }}
+        >
+          FACILITIES
+        </h1>
 
-  <div className="Facilities-direction">
-    <div className="Facilities-container">
-      <h1 style={{ color: "black", textAlign: "center" }}>Computers Lab</h1>
-      <img
-        src={computerslab}
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "180px",
-          height: "200px",
-          borderRadius: "10px",
-          boxShadow:
-            "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        }}
-      />
-      <p style={{ color: "black", margin: "10px", fontFamily: "cursive" }}>
-        Amazing smart classes and computer based test provide better
-        understanding to your child. Audio- Video lectures are also effective in
-        building concepts which only we provide to your child.
-      </p>
-    </div>
+        <div className="Facilities-direction">
+          <div className="Facilities-container">
+            <h1 style={{ color: "black", textAlign: "center" }}>
+              Computers Lab
+            </h1>
+            <img
+              src={computerslab}
+              style={{
+                display: "block",
+                margin: "0 auto",
+                width: "180px",
+                height: "200px",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+              }}
+            />
+            <p
+              style={{ color: "black", margin: "10px", fontFamily: "cursive" }}
+            >
+              Amazing smart classes and computer based test provide better
+              understanding to your child. Audio- Video lectures are also
+              effective in building concepts which only we provide to your
+              child.
+            </p>
+          </div>
 
-    <div className="Facilities-container">
-      <h1 style={{ color: "black", textAlign: "center" }}>Science Lab</h1>
-      <img
-        src={sciencelab}
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "180px",
-          height: "200px",
-          borderRadius: "10px",
-          boxShadow:
-            "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        }}
-      />
-      <p style={{ color: "black", margin: "10px", fontFamily: "cursive" }}>
-        Science is not a theory subject. It is based on practicals. We give
-        students the opportunity to perform chemical reactions on their own
-        under the supervision of teachers and with some precautions. 
-        easily.
-      </p>
-    </div>
+          <div className="Facilities-container">
+            <h1 style={{ color: "black", textAlign: "center" }}>Science Lab</h1>
+            <img
+              src={sciencelab}
+              style={{
+                display: "block",
+                margin: "0 auto",
+                width: "180px",
+                height: "200px",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+              }}
+            />
+            <p
+              style={{ color: "black", margin: "10px", fontFamily: "cursive" }}
+            >
+              Science is not a theory subject. It is based on practicals. We
+              give students the opportunity to perform chemical reactions on
+              their own under the supervision of teachers and with some
+              precautions. easily.
+            </p>
+          </div>
 
-    <div className="Facilities-container">
-      <h1 style={{ color: "black", textAlign: "center" }}>Library</h1>
-      <img
-        src={library}
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "180px",
-          height: "200px",
-          borderRadius: "10px",
-          boxShadow:
-            "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        }}
-      />
-      <p style={{ color: "black", margin: "10px", fontFamily: "cursive" }}>
-        A silent environment is essential for study, which is not always
-        available at home. Because of this, we are committed to providing a
-        superb library for book reading. It enhances students' understanding and
-        boosts their vocabulary.
-      </p>
-    </div>
+          <div className="Facilities-container">
+            <h1 style={{ color: "black", textAlign: "center" }}>Library</h1>
+            <img
+              src={library}
+              style={{
+                display: "block",
+                margin: "0 auto",
+                width: "180px",
+                height: "200px",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+              }}
+            />
+            <p
+              style={{ color: "black", margin: "10px", fontFamily: "cursive" }}
+            >
+              A silent environment is essential for study, which is not always
+              available at home. Because of this, we are committed to providing
+              a superb library for book reading. It enhances students'
+              understanding and boosts their vocabulary.
+            </p>
+          </div>
 
-    <div className="Facilities-container">
-      <h1 style={{ color: "black", textAlign: "center" }}>Maths Lab</h1>
-      <img
-        src={mathslab}
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "180px",
-          height: "200px",
-          borderRadius: "10px",
-          boxShadow:
-            "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        }}
-      />
-      <p style={{ color: "black", margin: "10px", fontFamily: "cursive" }}>
-        Students have the opportunity to build their daily math calculations
-        through math lab classes, which provide daily quizzes and MCQ-based
-        tests and practice papers for home. This has shown a significant change
-        in students' lives.
-      </p>
-    </div>
+          <div className="Facilities-container">
+            <h1 style={{ color: "black", textAlign: "center" }}>Maths Lab</h1>
+            <img
+              src={mathslab}
+              style={{
+                display: "block",
+                margin: "0 auto",
+                width: "180px",
+                height: "200px",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+              }}
+            />
+            <p
+              style={{ color: "black", margin: "10px", fontFamily: "cursive" }}
+            >
+              Students have the opportunity to build their daily math
+              calculations through math lab classes, which provide daily quizzes
+              and MCQ-based tests and practice papers for home. This has shown a
+              significant change in students' lives.
+            </p>
+          </div>
 
-    <div className="Facilities-container">
-      <h1 style={{ color: "black", textAlign: "center" }}>
-        Smart Classroom
-      </h1>
-      <img
-        src={smartclassroom}
-        style={{
-          display: "block",
-          margin: "0 auto",
-          width: "180px",
-          height: "auto",
-          borderRadius: "10px",
-          boxShadow:
-            "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
-        }}
-      />
-      <p style={{ color: "black", margin: "10px", fontFamily: "cursive" }}>
-        JD Public School's Smart Class transforms traditional learning with
-        state-of-the-art technology. Interactive lessons, visual aids, and
-        digital tools create an engaging and effective educational experience.
-        Join us to experience the future of education today.
-      </p>
-    </div>
-  </div>
-</div>
+          <div className="Facilities-container">
+            <h1 style={{ color: "black", textAlign: "center" }}>
+              Smart Classroom
+            </h1>
+            <img
+              src={smartclassroom}
+              style={{
+                display: "block",
+                margin: "0 auto",
+                width: "180px",
+                height: "auto",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+              }}
+            />
+            <p
+              style={{ color: "black", margin: "10px", fontFamily: "cursive" }}
+            >
+              JD Public School's Smart Class transforms traditional learning
+              with state-of-the-art technology. Interactive lessons, visual
+              aids, and digital tools create an engaging and effective
+              educational experience. Join us to experience the future of
+              education today.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div>
         <h1
@@ -541,10 +555,10 @@ export default function Home2() {
         </h1>
 
         {/* <ActiveSlideshow/> */}
-{/* 
+        {/* 
         <div className="School-Activities-mobile-res">
           <div className="School-Activities-Direction"> */}
-            {/* {productData.map((item) => (
+        {/* {productData.map((item) => (
               <div key={item._id} style={{ position: "relative" }}>
                 <img
                   src={`${BASE_URL}/${item.productImage}`}
@@ -554,24 +568,23 @@ export default function Home2() {
               </div>
             ))} */}
 
-            {/* <div style={{ position: "relative" }}>
+        {/* <div style={{ position: "relative" }}>
                 <img src={front} className="School-activities-image" />
                 <h1 className="School-activities-h1">Learn</h1>
               </div> */}
 
-            {/* <div style={{ position: "relative" }}>
+        {/* <div style={{ position: "relative" }}>
               <img src={girl} className="School-activities-image" />
               <h1 className="School-activities-h1">Adventure</h1>
             </div> */}
 
-            {/* <div style={{ position: "relative" }}>
+        {/* <div style={{ position: "relative" }}>
                 <img src={front} className="School-activities-image" />
                 <h1 className="School-activities-h1">Adventure</h1>
               </div> */}
-          {/* </div> */}
         {/* </div> */}
-        <SlidingImages/>
-
+        {/* </div> */}
+        <SlidingImages />
       </div>
 
       <div>
@@ -600,13 +613,13 @@ export default function Home2() {
           </div>
         </div> */}
 
-        <SlidingImagesAdventure/>
-      </div>    
+        <SlidingImagesAdventure />
+      </div>
 
-{/* <AutomaticSlideshow/> */}
+      {/* <AutomaticSlideshow/> */}
 
-{/* <Cardswipe/> */}
-{/* <SlidingImages/> */}
+      {/* <Cardswipe/> */}
+      {/* <SlidingImages/> */}
 
       {/* <Cardflip/> */}
       {/* <CommentCards/> */}
