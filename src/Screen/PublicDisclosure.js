@@ -63,7 +63,7 @@ export default function PublicDisclosure() {
           <h1 className="disclosure-subtitle">Mandatory Public Disclosure</h1>
           <hr />
           <table className="disclosure-table">
-            {[
+            {/* {[
               { name: "GENERAL INFORMATION", link: GENERALINFORMATION },
               { name: "COPIES OF AFFILIATION, UPGRADATION & EXTENSION LETTER", link: COPIESOFAFFILIATIONUPGRADATIONEXTENSIONLETTER },
               { name: "SOCIETIES OF RENEWAL CERTIFICATE", link: SOCIETIESOFRENEWALCERTIFICATE },
@@ -89,7 +89,7 @@ export default function PublicDisclosure() {
                   <a href={item.link} className="download-link">Download</a>
               </td>
            </tr>
-           ))}
+           ))} */}
 
             {productdata.length> 0 && productdata.map((item) => (
               <tr className="disclosure-row" key={item._id}>
